@@ -1,0 +1,30 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.bar-title {
+    font-size: 25px;
+    /* font-weight: bold; */
+}
+
+.bar-subtitle {
+    font-size: 18px;
+    /* font-weight: bold; */
+}
+
+.link {
+    filter: brightness(100%);
+    cursor: pointer;
+}
+
+.link:hover {
+    filter: brightness(70%);
+}
+
+::ng-deep .mat-expansion-panel-header {
+    color: rgba(54, 54, 54, 0.87);
+}
+
+::ng-deep .mat-expansion-panel-header[aria-disabled=true] {
+    color: rgba(54, 54, 54, 0.87);
+}

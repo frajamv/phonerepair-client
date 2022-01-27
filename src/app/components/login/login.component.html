@@ -1,0 +1,22 @@
+<div class="main-container p-auto m-auto">
+    <mat-card>
+        <h3 class="card-title">¡Bienvenido! <br> Ingresa tus credenciales para acceder.</h3>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="outline" class="form-input mt-4">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput [(ngModel)]="username" placeholder="Placeholder">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput [(ngModel)]="password" placeholder="Placeholder">
+            <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button class="btn col-12 mb-2" color="primary" (click)="login()">Ingresa</button>
+        <a href="/register">
+            <button mat-raised-button class="btn col-12" color="primary">No tengo una cuenta</button>
+        </a>
+    </mat-card>
+</div>

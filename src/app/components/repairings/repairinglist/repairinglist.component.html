@@ -1,0 +1,54 @@
+<div class="container py-5 px-2">
+    <h4 class="text-center font-weight-bold">LISTA DE REPARACIONES A TELÉFONOS REGISTRADOS</h4>
+    <mat-card class="d-flex justify-content-around">
+        <div class="p-0">
+            <h4>Teléfono</h4>
+        </div>
+        <div class="p-0">
+            <h4>Usuario</h4>
+        </div>
+        <div class="p-0">
+            <h4>Reparaciones</h4>
+        </div>
+    </mat-card>
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let repairing of repairings">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{repairing.phone?.brand}} {{repairing.phone?.reference}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{repairing.phone?.user?.full_name}}
+                    <div class="row">
+                        <div class="col-2">
+                            <mat-icon>event</mat-icon>
+                        </div>
+                        <div class="col-9">
+                            {{repairing.created_at | date: 'M/d/yy, hh:mm a'}}
+                        </div>
+                    </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row example-headers-align">
+                <div class="col-4">
+                    <p class="font-weight-bold">Estado de entrada al servicio:</p>
+                </div>
+                <div class="col-4">
+                    <p class="font-weight-bold">Estado de salida del servicio:</p>
+                </div>
+                <div class="col-4">
+                    <p class="font-weight-bold">Costo del servicio:</p>
+                </div>
+                <div class="col-4">
+                    <p>{{repairing.phone_entrance_status}}</p>
+                </div>
+                <div class="col-4">
+                    <p>{{repairing.phone_exit_status}}</p>
+                </div>
+                <div class="col-4">
+                    <p>{{repairing.repairing_cost | currency: 'COP'}}</p>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

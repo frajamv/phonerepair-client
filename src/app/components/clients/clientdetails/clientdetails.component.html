@@ -1,0 +1,130 @@
+<div class="container py-5 px-2" *ngIf="client">
+    <h1 class="text-center client-title">{{client.full_name}} ({{client.username}})</h1>
+    <h2 class="text-center client-subtitle">Teléfonos registrados del cliente.</h2>
+
+    <!-- HEADER DE LISTA -->
+    <mat-card class="d-flex justify-content-around">
+        <div class="p-0">
+            <h4>Marca</h4>
+        </div>
+        <div class="p-0">
+            <h4>Reparaciones</h4>
+        </div>
+    </mat-card>
+    <!-- LISTA DE TELÉFONOS DEL CLIENTE -->
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let phone of client.phones" hideToggle [disabled]="!phone.repairings || phone.repairings.length === 0 ? 'disabled':'false'">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{phone.brand + ' ' + phone.reference}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    <div class="row">
+                        <div class="col-2">
+                            <mat-icon>event</mat-icon>
+                        </div>
+                        <div class="col-8">
+                            {{phone.created_at | date: 'shortDate'}}
+                        </div>
+                    </div>
+                    {{phone.repairings.length}} {{phone.repairings.length>1 || phone.repairings.length == 0?'reparaciones':'reparación'}}.
+                    <mat-chip-list class="example-chip">
+                        <mat-chip class="example-box" matTooltip="Registrar reparación" [selected]="true" (click)="openPhoneRepairingDialog(phone, addPhoneRepairingDialog)">
+                            <mat-icon>add</mat-icon>
+                            <mat-icon>phonelink_setup</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="p-2" *ngIf="phone.repairings && phone.repairings.length > 0">
+                <h3 class="text-center font-weight-bold">Reparaciones registradas al teléfono</h3>
+                <table mat-table [dataSource]="phone.repairings" class="mat-elevation-z8">
+                    <ng-container matColumnDef="phone_entrance_status">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h4>Estado de entrada a servicio</h4>
+                        </th>
+                        <td mat-cell *matCellDef="let repairing" class="hover"> {{repairing.phone_entrance_status}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="phone_exit_status">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h4>Estado de salida de servicio</h4>
+                        </th>
+                        <td mat-cell *matCellDef="let repairing" class="hover"> {{repairing.phone_exit_status}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="repairing_cost">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h4 class="text-center">Costo facturado de reparación</h4>
+                        </th>
+                        <td mat-cell *matCellDef="let repairing" class="hover text-center"> {{repairing.repairing_cost | currency: 'COP'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="created_at">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h4 class="text-center">Fecha de reparación</h4>
+                        </th>
+                        <td mat-cell *matCellDef="let repairing" class="hover text-center"> {{repairing.created_at | date: 'short'}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                </table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <!-- FAB PARA AGREGAR TELÉFONO -->
+    <div class="example-button-container">
+        <button mat-fab color="primary" (click)="openPhoneDialog(addPhoneDialog)">
+        <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <!-- MODAL PARA AGREGAR TELÉFONO -->
+    <ng-template #addPhoneDialog>
+        <h1 mat-dialog-title class="text-center">REGISTRAR TELÉFONO</h1>
+        <div mat-dialog-content>
+            <mat-divider></mat-divider>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Marca</mat-label>
+                <input matInput [(ngModel)]="newPhone.brand" placeholder="Marca" type="search" autocomplete="off">
+                <mat-icon matSuffix>camera_front</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Referencia</mat-label>
+                <input matInput [(ngModel)]="newPhone.reference" placeholder="Referencia" type="search" autocomplete="off">
+                <mat-icon matSuffix>perm_device_information</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Año de compra</mat-label>
+                <input matInput [(ngModel)]="newPhone.purchase_year" placeholder="Año de compra" type="number" min="2000" max="maxYear" autocomplete="off">
+                <mat-icon matSuffix>event</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-around mt-4" mat-dialog-actions>
+            <button mat-raised-button class="btn col-5" color="primary" [mat-dialog-close]="false">Cancelar</button>
+            <button mat-raised-button class="col-5" color="primary" [mat-dialog-close]="true" [disabled]="phoneCreationButtonEnabled()?'false':'disabled'" cdkFocusInitial>Registrar</button>
+        </div>
+    </ng-template>
+    <!-- MODAL PARA AGREGAR REPARACIÓN -->
+    <ng-template #addPhoneRepairingDialog let-data>
+        <h1 mat-dialog-title class="text-center">REGISTRAR REPARACIÓN DE {{data.phoneName}}</h1>
+        <div mat-dialog-content>
+            <mat-divider></mat-divider>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Estado del teléfono al entrar a servicio</mat-label>
+                <input matInput [(ngModel)]="newPhoneRepairing.phone_entrance_status" placeholder="Estado del teléfono al entrar a servicio" type="search" autocomplete="off">
+                <mat-icon matSuffix>login</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Estado del teléfono al salir del servicio</mat-label>
+                <input matInput [(ngModel)]="newPhoneRepairing.phone_exit_status" placeholder="Estado del teléfono al salir del servicio" type="search" autocomplete="off">
+                <mat-icon matSuffix>logout</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Costo de servicio</mat-label>
+                <input matInput [(ngModel)]="newPhoneRepairing.repairing_cost" placeholder="Costo de servicio" type="number" autocomplete="off">
+                <mat-icon matSuffix>monetization_on</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-around mt-4" mat-dialog-actions>
+            <button mat-raised-button class="btn col-5" color="primary" [mat-dialog-close]="false">Cancelar</button>
+            <button mat-raised-button class="col-5" color="primary" [mat-dialog-close]="true" [disabled]="phoneRepairingCreationButtonEnabled()?'false':'disabled'" cdkFocusInitial>Registrar</button>
+        </div>
+    </ng-template>
+</div>

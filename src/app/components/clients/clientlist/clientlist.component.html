@@ -1,0 +1,57 @@
+<div class="container py-5 px-2">
+    <h4 class="text-center">LISTA DE CLIENTES REGISTRADOS</h4>
+    <table mat-table [dataSource]="clients" class="mat-elevation-z8">
+        <ng-container matColumnDef="full_name">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Nombre completo</h4>
+            </th>
+            <td mat-cell *matCellDef="let client" class="{{client.phones.length>0?'hover':''}}" (click)="goToClientDetails(client)"> {{client.full_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Nombre de usuario</h4>
+            </th>
+            <td mat-cell *matCellDef="let client" class="{{client.phones.length>0?'hover':''}}" (click)="goToClientDetails(client)"> {{client.username}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phones">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4># Teléfonos registrados</h4>
+            </th>
+            <td mat-cell *matCellDef="let client" class="{{client.phones.length>0?'hover':''}} text-center" (click)="goToClientDetails(client)"> {{client.phones.length}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Estado actual</h4>
+            </th>
+            <td mat-cell *matCellDef="let client" class="{{client.phones.length>0?'hover':''}} text-center" (click)="goToClientDetails(client)"> {{client.status === '1'?'Activo':'Inactivo'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>
+<div class="example-button-container">
+    <button mat-fab color="primary" (click)="openDialog(addClientDialog)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <ng-template #addClientDialog>
+        <h1 mat-dialog-title>REGISTRAR CLIENTE</h1>
+        <div mat-dialog-content>
+            <mat-divider></mat-divider>
+            <mat-form-field appearance="outline" class="form-input mt-4">
+                <mat-label>Nombre completo</mat-label>
+                <input matInput [(ngModel)]="newClient.full_name" placeholder="Nombre completo" type="search" autocomplete="off">
+                <mat-icon matSuffix>badge</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-input">
+                <mat-label>Nombre de usuario</mat-label>
+                <input matInput [(ngModel)]="newClient.username" placeholder="Nombre de usuario" type="search" maxlength="20" autocomplete="off">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint *ngIf="newClient.username !== ''">Contraseña autogenerada para cliente: {{newClient.username+passwordComp}}</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-around mt-4" mat-dialog-actions>
+            <button mat-raised-button class="btn col-5" color="primary" [mat-dialog-close]="false">Cancelar</button>
+            <button mat-raised-button class="col-5" color="primary" [mat-dialog-close]="true" [disabled]="creationButtonEnabled()?'false':'disabled'" cdkFocusInitial>Registrar</button>
+        </div>
+    </ng-template>
+</div>

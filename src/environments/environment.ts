@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URI: 'https://phonerepair-api.herokuapp.com/api',
+  USER_ROUTE: '/users',
+  PHONE_ROUTE: '/phones',
 };
 
 /*

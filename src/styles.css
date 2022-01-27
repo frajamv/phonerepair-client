@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.main-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(66, 66, 66);
+    background-image: url("https://thumbs.dreamstime.com/b/mobile-phone-repair-upgrade-smartphone-repairing-concept-photo-85343567.jpg");
+    background-size: 100%;
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+}
+
+.card-title {
+    text-align: center;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}

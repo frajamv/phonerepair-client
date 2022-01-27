@@ -1,0 +1,27 @@
+<div class="main-container p-auto m-auto">
+    <mat-card>
+        <h3 class="card-title">¡Bienvenido! <br> Crea tu cuenta para ingresar al sistema.</h3>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="outline" class="form-input mt-4">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput [(ngModel)]="full_name" placeholder="Nombre completo" type="search" autocomplete="off">
+            <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput [(ngModel)]="username" placeholder="Nombre de usuario" type="search" autocomplete="off">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput [(ngModel)]="password" placeholder="Contraseña" autocomplete="off">
+            <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button class="btn col-12 mb-2" color="primary" (click)="register()">Registrarse</button>
+        <a href="/login">
+            <button mat-raised-button class="btn col-12" color="primary">Ya tengo una cuenta</button>
+        </a>
+    </mat-card>
+</div>
