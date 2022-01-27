@@ -43,7 +43,7 @@ export class UtilService {
 
   public openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action || 'OK', {
-      duration: 500
+      duration: 2000,
     });
   }
 }

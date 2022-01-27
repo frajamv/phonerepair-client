@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Phone } from 'src/app/models/phone';
 import { PhoneRepairing } from 'src/app/models/phone-repairing';
@@ -7,6 +7,7 @@ import { PhoneService } from 'src/app/services/phone/phone.service';
 import { PhonerepairingService } from 'src/app/services/repairing/phonerepairing.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { UtilService } from 'src/app/services/util/util.service';
+import { PhoneCreationFormComponent } from '../../phones/phone-creation-form/phone-creation-form.component';
 
 @Component({
   selector: 'app-clientdetails',
@@ -45,20 +46,17 @@ export class ClientdetailsComponent implements OnInit {
     });
   }
 
-  openPhoneDialog(dialogTemplate: any) {
-    const dialogRef = this.dialog.open(dialogTemplate, {
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.phoneService.createPhone(this.user_id, this.newPhone).subscribe((res: any) => {
-          this.utilService.openSnackBar(res.message, 'OK');
-          this.fetchClientData();
-          this.resetNewData();
-        }, (error: any) => {
-          this.utilService.openSnackBar(`${error.error}`, 'OK');
-        })
-      }
-    });
+  openPhoneDialog() {
+    if (this.client.user_id) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.data = { client: this.client };
+      dialogConfig.id = 'phone-dialog-component';
+      const modalDialog = this.dialog.open(PhoneCreationFormComponent, dialogConfig);
+      modalDialog.afterClosed().subscribe(result => {
+        if (result) this.fetchClientData();
+      })
+    }
   }
 
   openPhoneRepairingDialog(phone: Phone, dialogTemplate: any) {

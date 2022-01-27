@@ -17,7 +17,21 @@
             <th mat-header-cell *matHeaderCellDef>
                 <h4># Teléfonos registrados</h4>
             </th>
-            <td mat-cell *matCellDef="let client" class="{{client.phones.length>0?'hover':''}} text-center" (click)="goToClientDetails(client)"> {{client.phones.length}} </td>
+            <td mat-cell *matCellDef="let client" class="{{client.phones.length>0?'hover':''}} text-center" (click)="goToClientDetails(client)">
+                <div class="row text-center align-items-center">
+                    <div class="col-4">
+                        {{client.phones.length}}
+                    </div>
+                    <div class="col-8">
+                        <mat-chip-list class="example-chip">
+                            <mat-chip class="example-box" matTooltip="Registrar reparación" [selected]="true" (click)="openPhoneDialog(client)">
+                                <mat-icon>add</mat-icon>
+                                <mat-icon>phone_android</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
+            </td>
         </ng-container>
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>

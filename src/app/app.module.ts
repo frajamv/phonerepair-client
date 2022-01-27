@@ -13,6 +13,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ClientlistComponent } from './components/clients/clientlist/clientlist.component';
 import { ClientdetailsComponent } from './components/clients/clientdetails/clientdetails.component';
 import { RepairinglistComponent } from './components/repairings/repairinglist/repairinglist.component';
+import { PhoneCreationFormComponent } from './components/phones/phone-creation-form/phone-creation-form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RepairinglistComponent } from './components/repairings/repairinglist/re
     ClientlistComponent,
     ClientdetailsComponent,
     RepairinglistComponent,
+    PhoneCreationFormComponent,
   ],
   imports: [
     FormsModule,

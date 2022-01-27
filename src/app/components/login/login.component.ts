@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 import { UtilService } from 'src/app/services/util/util.service';
 
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public utilService: UtilService
+    public utilService: UtilService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,8 +27,12 @@ export class LoginComponent implements OnInit {
     this.userService.verifyCredentials(credentials).subscribe((res: any) => {
       this.utilService.saveToStorage('user', res.user)
       this.utilService.saveToStorage('token', res.token)
-      this.utilService.openSnackBar(`${res.message}`, 'OK');
-      window.location.href = '/clients';
+      // window.location.href = '/clients';
+      this.router.navigate(['/clients']).then((navigated: boolean) => {
+        if (navigated) {
+          this.utilService.openSnackBar(`${res.message}`, 'OK');
+        }
+      });
     }, (error: any) => {
       return this.utilService.openSnackBar(`${error.error.status}`, 'OK');
     })

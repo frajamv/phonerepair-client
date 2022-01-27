@@ -1,0 +1,24 @@
+<!-- MODAL PARA AGREGAR TELÉFONO -->
+<h1 mat-dialog-title class="text-center">REGISTRAR TELÉFONO</h1>
+<div mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-form-field appearance="outline" class="form-input mt-4">
+        <mat-label>Marca</mat-label>
+        <input matInput [(ngModel)]="newPhone.brand" placeholder="Marca" type="search" autocomplete="off">
+        <mat-icon matSuffix>camera_front</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-input mt-4">
+        <mat-label>Referencia</mat-label>
+        <input matInput [(ngModel)]="newPhone.reference" placeholder="Referencia" type="search" autocomplete="off">
+        <mat-icon matSuffix>perm_device_information</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-input mt-4">
+        <mat-label>Año de compra</mat-label>
+        <input matInput [(ngModel)]="newPhone.purchase_year" placeholder="Año de compra" type="number" min="2000" max="maxYear" autocomplete="off">
+        <mat-icon matSuffix>event</mat-icon>
+    </mat-form-field>
+</div>
+<div class="d-flex justify-content-around mt-4" mat-dialog-actions>
+    <button mat-raised-button class="btn col-5" color="primary" (click)="closeDialog(false)">Cancelar</button>
+    <button mat-raised-button class="col-5" color="primary" (click)="closeDialog(true)" [disabled]="phoneCreationButtonEnabled()?'false':'disabled'" cdkFocusInitial>Registrar</button>
+</div>

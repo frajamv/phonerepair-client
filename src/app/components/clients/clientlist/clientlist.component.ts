@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import User from 'src/app/models/user';
 import { UserService } from 'src/app/services/user/user.service';
 import { UtilService } from 'src/app/services/util/util.service';
+import { PhoneCreationFormComponent } from '../../phones/phone-creation-form/phone-creation-form.component';
 
 @Component({
   selector: 'app-clientlist',
@@ -19,23 +20,17 @@ export class ClientlistComponent implements OnInit {
   passwordComp = '.root123';
 
   constructor(
-    public utilService: UtilService,
-    public userService: UserService,
-    public dialog: MatDialog
+    private utilService: UtilService,
+    private userService: UserService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.utilService.validateLoggedUser();
     this.token = this.utilService.getFromStorage('token');
     this.user = this.utilService.getFromStorage('user');
-
-    this.newClient = {
-      full_name: '',
-      username: '',
-      password: '',
-      role_id: 2
-    }
     this.fetchAllClients();
+    this.resetNewData();
   }
 
   fetchAllClients() {
@@ -69,5 +64,27 @@ export class ClientlistComponent implements OnInit {
 
   creationButtonEnabled() {
     return this.newClient.full_name != '' && this.newClient.username != '';
+  }
+
+  openPhoneDialog(client: User) {
+    if (client.user_id) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.data = { client };
+      dialogConfig.id = 'phone-dialog-component';
+      const modalDialog = this.dialog.open(PhoneCreationFormComponent, dialogConfig);
+      modalDialog.afterClosed().subscribe(result => {
+        if (result) this.fetchAllClients();
+      })
+    }
+  }
+
+  resetNewData() {
+    this.newClient = {
+      full_name: '',
+      username: '',
+      password: '',
+      role_id: 2
+    }
   }
 }

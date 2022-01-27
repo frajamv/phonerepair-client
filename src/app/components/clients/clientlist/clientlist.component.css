@@ -9,3 +9,8 @@ h4 {
 .hover {
     cursor: pointer;
 }
+
+.mat-header-cell {
+    background: #3F51B5;
+    color: white;
+}
