@@ -10,8 +10,8 @@ import { UtilService } from 'src/app/services/util/util.service';
 })
 export class LoginComponent implements OnInit {
 
-  username = '';
-  password = '';
+  username = 'mocha';
+  password = 'root123';
 
   constructor(
     public userService: UserService,
@@ -28,8 +28,11 @@ export class LoginComponent implements OnInit {
   login() {
     const credentials = { username: this.username, password: this.password };
     this.userService.verifyCredentials(credentials).subscribe((res: any) => {
-      if(res.user.role !== 'Administrador') {
+      console.table(res.user)
+      console.log(res.user.role)
+      if (res.user.role !== 'Administrador') {
         this.utilService.openSnackBar('Esta versión de la aplicación sólo está permitida para administradores.', 'OK');
+        return this.resetCredentials();
       }
       this.utilService.saveToStorage('user', res.user)
       this.utilService.saveToStorage('token', res.token)
@@ -40,8 +43,14 @@ export class LoginComponent implements OnInit {
         }
       });
     }, (error: any) => {
+      this.resetCredentials();
       return this.utilService.openSnackBar(`${error.error.status}`, 'OK');
     })
+  }
+
+  resetCredentials() {
+    this.username = '';
+    this.password = '';
   }
 
 }
