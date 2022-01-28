@@ -6,7 +6,7 @@ Proyecto generado con [Angular CLI](https://github.com/angular/angular-cli) vers
 Ejecutar en terminal integrada `ng serve -o` para ejecutar servidor local de desarrollo de la aplicación. La aplicación se abrirá automáticamente en el navegador predeterminado en la ruta `http://localhost:4200/`.
 
 ## Acceder a versión pública de aplicación:
-Acceder al [enlace](https://61f36a21d8b9f60008a0ddf0--phonerepairbyfrajam.netlify.app/login) para ingresar a la aplicación montada en el servicio de Netifly.
+Acceder al [enlace](https://61f3d9a9caa81b00084acec5--phonerepairbyfrajam.netlify.app/login) para ingresar a la aplicación montada en el servicio de Netifly.
 
 ## Rutas principales (local y público):
 - /login: Ruta inicial de la aplicación, requerirá iniciar sesión con credenciales existentes para avanzar o bien presionar en 'No tengo una cuenta' para tener credenciales de acceso.
