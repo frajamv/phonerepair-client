@@ -38,6 +38,9 @@ export class ClientdetailsComponent implements OnInit {
     this.resetNewData();
   }
 
+  /**
+   * Obtener datos del cliente y llenarlos en objeto 'client'.
+   */
   fetchClientData() {
     this.userService.getClientData(this.user_id).subscribe((res: any) => {
       this.client = res;
@@ -46,6 +49,9 @@ export class ClientdetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Abre un componente diálogo que contiene un formulario de creación de teléfono.
+   */
   openPhoneDialog() {
     if (this.client.user_id) {
       const dialogConfig = new MatDialogConfig();
@@ -58,6 +64,9 @@ export class ClientdetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Abre un componente diálogo que contiene un formulario de creación de reparación de teléfono.
+   */
   openPhoneRepairingDialog(phone: Phone, dialogTemplate: any) {
     if (phone.phone_id) {
       this.newPhoneRepairing.phone_id = phone.phone_id;
@@ -78,14 +87,23 @@ export class ClientdetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Determina si el botón de creación de teléfono puede presionarse.
+   */
   phoneCreationButtonEnabled() {
     return this.newPhone.brand !== '' && this.newPhone.reference !== '' && this.newPhone.purchase_year > 2000 && this.newPhone.user_id != 0
   }
 
+  /**
+   * Determina si el botón de creación de reparación de teléfono puede presionarse.
+   */
   phoneRepairingCreationButtonEnabled() {
     return this.newPhoneRepairing.phone_entrance_status !== '' && this.newPhoneRepairing.phone_exit_status !== '' && this.newPhoneRepairing.repairing_cost > 0 && this.newPhoneRepairing.phone_id;
   }
 
+  /**
+   * Limpia todos los datos de los formularios de creación.
+   */
   resetNewData() {
     this.newPhone = {
       brand: '',

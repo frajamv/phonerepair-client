@@ -34,6 +34,9 @@ export class ClientlistComponent implements OnInit {
     this.resetNewData();
   }
 
+  /**
+   * Obtiene todos los clientes del sistema y los guarda en 'clients';
+   */
   fetchAllClients() {
     this.userService.getAllClients().subscribe((res: any) => {
       this.clients = res;
@@ -43,10 +46,18 @@ export class ClientlistComponent implements OnInit {
     })
   }
 
+  /**
+   * Obtiene los datos del cliente (teléfonos y reparaciones) y renderiza a la página de detalles de cliente.
+   * @param client Cliente cuyos datos se obtendrán.
+   */
   goToClientDetails(client: any) {
     if (client.phones?.length > 0) window.location.href = `/clients/${client.user_id}`;
   }
 
+  /**
+   * Abre un diálogo de creación de un nuevo cliente.
+   * @param dialogTemplate Template de creación de cliente.
+   */
   openDialog(dialogTemplate: any) {
     this.dialogRef = this.dialog.open(dialogTemplate, {
     });
@@ -58,12 +69,18 @@ export class ClientlistComponent implements OnInit {
     });
   }
 
+  /**
+   * Cierra el diálogo de creación de nuevo cliente.
+   */
   closeDialog() {
     this.dialogRef.close();
     this.registerClient();
 
   }
 
+  /**
+   * Llama el servicio de creación de clientes, recarga la vista y limpia el formulario.
+   */
   registerClient() {
     console.table(this.newClient)
     this.newClient.password = `${this.newClient.username}.${this.passwordComp}`
@@ -77,10 +94,17 @@ export class ClientlistComponent implements OnInit {
     })
   }
 
+  /**
+   * Determina si se puede llamar al servicio de creación de cliente con los inputs llenos.
+   */
   creationButtonEnabled() {
     return this.newClient.full_name != '' && this.newClient.username != '';
   }
 
+  /**
+   * Abre un diálogo de creación de teléfono para un cliente.
+   * @param client Cliente del cual se creará el teléfono.
+   */
   openPhoneDialog(client: User) {
     if (client.user_id) {
       const dialogConfig = new MatDialogConfig();
@@ -93,6 +117,9 @@ export class ClientlistComponent implements OnInit {
     }
   }
 
+  /**
+   * Reinicia los inputs del formulario de cliente.
+   */
   resetNewData() {
     this.newClient = {
       full_name: '',

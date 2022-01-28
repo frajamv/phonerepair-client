@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Llama al servicio que valida las credenciales del sistema, si resulta exitoso guarda el token y usuario obtenidos para futuras peticiones.
+   */
   login() {
     const credentials = { username: this.username, password: this.password };
     this.userService.verifyCredentials(credentials).subscribe((res: any) => {

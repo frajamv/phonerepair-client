@@ -1,5 +1,8 @@
 import { Phone } from "./phone";
 
+/**
+ * Objeto reparación de teléfono del sistema.
+ */
 export interface PhoneRepairing {
     id?: number,
     phone_entrance_status: string,

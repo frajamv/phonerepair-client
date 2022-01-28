@@ -8,15 +8,21 @@ import { UtilService } from '../util/util.service';
 })
 export class PhoneService {
 
-  URI = environment.API_URI;
-  PHONE_ROUTE = environment.PHONE_ROUTE;
-  addPhoneEP = this.URI + this.PHONE_ROUTE;
+  URI = environment.API_URI; // URI de REST API.
+  PHONE_ROUTE = environment.PHONE_ROUTE; // Subruta para peticiones de telefono.
+  addPhoneEP = this.URI + this.PHONE_ROUTE; // Endpoint para peticiones de telefono.
 
   constructor(
     private http: HttpClient,
     private utilService: UtilService
   ) { }
 
+  /**
+   * Envía una petición POST al REST API que crea un teléfono a un usuario, adjunta un token de JWT como parámetro para el acceso.
+   * @param user_id Id de usuario al que pertenece el teléfono.
+   * @param phone Datos del teléfono a agregar.
+   * @returns Respuesta del servicio.
+   */
   public createPhone(user_id: any, phone: any) {
     const token = this.utilService.getFromStorage('token');
     if (!token) this.utilService.logout();

@@ -1,5 +1,8 @@
 import User from "./user";
 
+/**
+ * Objeto teléfono de un usuario del sistema.
+ */
 export interface Phone {
     phone_id?: number,
     brand: string,

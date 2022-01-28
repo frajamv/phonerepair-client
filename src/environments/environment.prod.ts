@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  API_URI: 'https://phonerepair-api.herokuapp.com/api',
-  USER_ROUTE: '/users',
-  PHONE_ROUTE: '/phones',
+  API_URI: 'https://phonerepair-api.herokuapp.com/api', // REST API de phonerepair.
+  USER_ROUTE: '/users', // Subruta de REST API para usuarios.
+  PHONE_ROUTE: '/phones', // Subruta de REST API para teléfonos.
 };

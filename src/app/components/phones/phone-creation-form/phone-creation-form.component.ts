@@ -26,10 +26,16 @@ export class PhoneCreationFormComponent implements OnInit {
     this.resetNewData();
   }
 
+  /**
+   * Determina si se puede llamar al servicio de creación de teléfono con los inputs llenos.
+   */
   phoneCreationButtonEnabled() {
     return this.newPhone.brand !== '' && this.newPhone.reference !== '' && this.newPhone.purchase_year > 2000 && Boolean(this.modalData.client.user_id);
   }
 
+  /**
+   * Reinicia los inputs del formulario de teléfono.
+   */
   resetNewData() {
     this.newPhone = {
       brand: '',
@@ -39,6 +45,9 @@ export class PhoneCreationFormComponent implements OnInit {
     };
   }
 
+  /**
+   * Cierra el diálogo de creación. Si 'save' es true llama al servicio de creación de teléfono.
+   */
   closeDialog(save: boolean) {
     if (save && this.modalData?.client?.user_id) {
       this.newPhone.user_id = this.modalData.client.user_id;

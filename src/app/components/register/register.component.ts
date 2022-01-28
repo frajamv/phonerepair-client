@@ -29,6 +29,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Crea un objeto con los datos personales del usuario en la UI y llama al servicio que lo registra.
+   * Si este proceso es exitoso se redirige al login para que inicie sesión.
+   */
   register() {
     const user = {
       full_name: this.full_name,

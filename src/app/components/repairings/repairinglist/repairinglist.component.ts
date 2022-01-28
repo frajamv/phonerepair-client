@@ -21,6 +21,9 @@ export class RepairinglistComponent implements OnInit {
     this.fetchAllRepairings();
   }
 
+  /**
+   * Llama al servicio que obtiene todas las reparaciones guardadas en el sistema y las guarda en 'repairings'.
+   */
   fetchAllRepairings() {
     this.repairingService.getAllPhoneRepairings().subscribe((res: any) => {
       this.repairings = res;
