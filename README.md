@@ -29,6 +29,7 @@ NOTA: Sólamente se podrá acceder a las rutas principales o a sus subrutas desp
 - Al seleccionar en cualquier reparación, se abrirá un subpanel de detalles que mostrará el estado del teléfono al entrar al servicio, su estado al salir de la tienda y el costo por el servicio prestado.
 
 ## Notas finales:
+- Las credenciales compuestas por el nombre de usuario 'mocha' y contraseña 'root123' pueden ser utilizadas para acceder al mismo. En caso de pérdida o limpieza de base de datos, es posible registrarse e iniciar sesión.
 - La REST API utilizada para realizar las operaciones de datos se encuentra montada en el servicio de Heroku, no se require el montaje del mismo.
 - La base de datos utilizada para almacenar y tratar los datos de la prueba se encuentra montada en el servicio RDS de AWS, no se requiere el montaje de la misma.
 - Proyecto creado y montado en todas sus fases de desarrollo por Francisco Javier Martínez Vargas en Enero de 2022.
