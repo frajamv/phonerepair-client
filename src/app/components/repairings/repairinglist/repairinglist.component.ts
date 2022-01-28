@@ -11,6 +11,7 @@ import { UtilService } from 'src/app/services/util/util.service';
 export class RepairinglistComponent implements OnInit {
 
   repairings: PhoneRepairing[] = [];
+  fetchingData = false;
 
   constructor(
     private repairingService: PhonerepairingService,
@@ -25,10 +26,14 @@ export class RepairinglistComponent implements OnInit {
    * Llama al servicio que obtiene todas las reparaciones guardadas en el sistema y las guarda en 'repairings'.
    */
   fetchAllRepairings() {
+    this.fetchingData = true;
     this.repairingService.getAllPhoneRepairings().subscribe((res: any) => {
       this.repairings = res;
+      this.fetchingData = false;
     }, (error: any) => {
+      if (error.status === 403) return this.utilService.logout();
       this.utilService.openSnackBar(`${error.error}`, 'OK');
+      this.fetchingData = false;
     })
   }
 

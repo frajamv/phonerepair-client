@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   full_name = '';
   username = '';
-  password = 'root123'; // Prueba con usuario existente, puede ser limpiado.
+  password = ''; // Prueba con usuario existente, puede ser limpiado.
   role_id = 1; // Sólo los administradores se registran por sí mismos.
   newClient: User = {
     full_name: '',

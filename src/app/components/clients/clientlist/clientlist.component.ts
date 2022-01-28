@@ -19,6 +19,7 @@ export class ClientlistComponent implements OnInit {
   newClient!: User;
   passwordComp = '.root123';
   dialogRef!: any;
+  fetchingData = false;
 
   constructor(
     private utilService: UtilService,
@@ -38,11 +39,15 @@ export class ClientlistComponent implements OnInit {
    * Obtiene todos los clientes del sistema y los guarda en 'clients';
    */
   fetchAllClients() {
+    this.fetchingData = true;
     this.userService.getAllClients().subscribe((res: any) => {
       this.clients = res;
+      this.fetchingData = false;
+      console.log('No data?',(!this.clients || this.clients.length === 0));
     }, (error: any) => {
       if (error.status === 403) return this.utilService.logout();
       this.utilService.openSnackBar(error.error, 'OK');
+      this.fetchingData = false;
     })
   }
 

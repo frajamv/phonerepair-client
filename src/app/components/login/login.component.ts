@@ -10,8 +10,8 @@ import { UtilService } from 'src/app/services/util/util.service';
 })
 export class LoginComponent implements OnInit {
 
-  username = 'mocha';
-  password = 'root123';
+  username = '';
+  password = '';
 
   constructor(
     public userService: UserService,
@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.utilService.destroyFromStorage('token');
+    this.utilService.destroyFromStorage('user');
   }
 
   /**

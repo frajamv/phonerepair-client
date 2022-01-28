@@ -22,6 +22,7 @@ export class ClientdetailsComponent implements OnInit {
   newPhone!: Phone;
   newPhoneRepairing!: PhoneRepairing;
   maxYear = (new Date()).getFullYear();
+  fetchingData = false;
 
   constructor(
     private dialog: MatDialog,
@@ -42,10 +43,15 @@ export class ClientdetailsComponent implements OnInit {
    * Obtener datos del cliente y llenarlos en objeto 'client'.
    */
   fetchClientData() {
+    this.fetchingData = true;
     this.userService.getClientData(this.user_id).subscribe((res: any) => {
       this.client = res;
+      if(!this.client) window.location.href = '/clients';
+      this.fetchingData = false;
     }, (error: any) => {
+      if (error.status === 403) return this.utilService.logout();
       this.utilService.openSnackBar(error.error, 'OK');
+      this.fetchingData = false;
     });
   }
 

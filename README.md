@@ -1,13 +1,11 @@
 # PhonerepairClient
-
 Cliente web para la aplicación de reparación de teléfonos. Repositorio frontend para prueba técnica Mid-Level de Innpactia.
 Proyecto generado con [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
 
 ## Ejecutar servidor local:
-
 Ejecutar en terminal integrada `ng serve -o` para ejecutar servidor local de desarrollo de la aplicación. La aplicación se abrirá automáticamente en el navegador predeterminado en la ruta `http://localhost:4200/`.
-## Acceder a versión pública de aplicación:
 
+## Acceder a versión pública de aplicación:
 Acceder al [enlace](https://61f36a21d8b9f60008a0ddf0--phonerepairbyfrajam.netlify.app/login) para ingresar a la aplicación montada en el servicio de Netifly.
 
 ## Rutas principales (local y público):
@@ -29,7 +27,7 @@ NOTA: Sólamente se podrá acceder a las rutas principales o a sus subrutas desp
 - Al seleccionar en cualquier reparación, se abrirá un subpanel de detalles que mostrará el estado del teléfono al entrar al servicio, su estado al salir de la tienda y el costo por el servicio prestado.
 
 ## Notas finales:
-- Las credenciales compuestas por el nombre de usuario 'mocha' y contraseña 'root123' pueden ser utilizadas para acceder al mismo. En caso de pérdida o limpieza de base de datos, es posible registrarse e iniciar sesión.
+- Las credenciales compuestas por el nombre de usuario 'frajam' y contraseña 'root123' pueden ser utilizadas para acceder al mismo. En caso de pérdida o limpieza de base de datos, es posible registrarse e iniciar sesión.
 - La REST API utilizada para realizar las operaciones de datos se encuentra montada en el servicio de Heroku, no se require el montaje del mismo.
 - La base de datos utilizada para almacenar y tratar los datos de la prueba se encuentra montada en el servicio RDS de AWS, no se requiere el montaje de la misma.
 - Proyecto creado y montado en todas sus fases de desarrollo por Francisco Javier Martínez Vargas en Enero de 2022.
