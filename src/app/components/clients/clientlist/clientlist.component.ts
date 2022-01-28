@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import User from 'src/app/models/user';
 import { UserService } from 'src/app/services/user/user.service';
 import { UtilService } from 'src/app/services/util/util.service';
@@ -18,6 +18,7 @@ export class ClientlistComponent implements OnInit {
   columns = ['full_name', 'username', 'phones', 'status'];
   newClient!: User;
   passwordComp = '.root123';
+  dialogRef!: any;
 
   constructor(
     private utilService: UtilService,
@@ -47,19 +48,33 @@ export class ClientlistComponent implements OnInit {
   }
 
   openDialog(dialogTemplate: any) {
-    const dialogRef = this.dialog.open(dialogTemplate, {
+    this.dialogRef = this.dialog.open(dialogTemplate, {
     });
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        this.newClient.password = this.newClient.username + this.passwordComp;
-        this.userService.register(this.newClient).subscribe((res: any) => {
-          this.utilService.openSnackBar(res.message, 'OK');
-          this.fetchAllClients();
-        }, (error: any) => {
-          this.utilService.openSnackBar(`${error.error}`, 'OK');
-        })
+        this.registerClient();
       }
+      this.resetNewData();
     });
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+    this.registerClient();
+
+  }
+
+  registerClient() {
+    console.table(this.newClient)
+    this.newClient.password = `${this.newClient.username}.${this.passwordComp}`
+    this.userService.register(this.newClient).subscribe((res: any) => {
+      this.utilService.openSnackBar(res.message, 'OK');
+      this.fetchAllClients();
+      this.resetNewData();
+    }, (error: any) => {
+      this.resetNewData();
+      this.utilService.openSnackBar(`${error.error}`, 'OK');
+    })
   }
 
   creationButtonEnabled() {
@@ -69,7 +84,6 @@ export class ClientlistComponent implements OnInit {
   openPhoneDialog(client: User) {
     if (client.user_id) {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
       dialogConfig.data = { client };
       dialogConfig.id = 'phone-dialog-component';
       const modalDialog = this.dialog.open(PhoneCreationFormComponent, dialogConfig);

@@ -49,7 +49,6 @@ export class ClientdetailsComponent implements OnInit {
   openPhoneDialog() {
     if (this.client.user_id) {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
       dialogConfig.data = { client: this.client };
       dialogConfig.id = 'phone-dialog-component';
       const modalDialog = this.dialog.open(PhoneCreationFormComponent, dialogConfig);

@@ -1,4 +1,4 @@
-<div class="container py-5 px-2">
+<div class="container back-page py-5 px-2" *ngIf="clients && clients.length > 0; else loading">
     <h1 class="text-center font-weight-bold">LISTA DE CLIENTES REGISTRADOS</h1>
     <table mat-table [dataSource]="clients" class="mat-elevation-z8 table-hover">
         <ng-container matColumnDef="full_name">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-8">
                         <mat-chip-list class="example-chip">
-                            <mat-chip class="example-box" matTooltip="Registrar reparación" [selected]="true" (click)="openPhoneDialog(client)">
+                            <mat-chip class="example-box" matTooltip="Registrar teléfono" [selected]="true" (click)="openPhoneDialog(client)">
                                 <mat-icon>add</mat-icon>
                                 <mat-icon>phone_android</mat-icon>
                             </mat-chip>
@@ -44,7 +44,7 @@
     </table>
 </div>
 <div class="example-button-container">
-    <button mat-fab color="primary" (click)="openDialog(addClientDialog)">
+    <button mat-fab color="primary" matTooltip="Registrar nuevo cliente" (click)="openDialog(addClientDialog)">
       <mat-icon>add</mat-icon>
     </button>
     <ng-template #addClientDialog>
@@ -53,12 +53,12 @@
             <mat-divider></mat-divider>
             <mat-form-field appearance="outline" class="form-input mt-4">
                 <mat-label>Nombre completo</mat-label>
-                <input matInput [(ngModel)]="newClient.full_name" placeholder="Nombre completo" type="search" autocomplete="off">
+                <input matInput [(ngModel)]="newClient.full_name" placeholder="Nombre completo" type="search" autocomplete="off" (keyup.enter)="closeDialog()">
                 <mat-icon matSuffix>badge</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline" class="form-input">
                 <mat-label>Nombre de usuario</mat-label>
-                <input matInput [(ngModel)]="newClient.username" placeholder="Nombre de usuario" type="search" maxlength="20" autocomplete="off">
+                <input matInput [(ngModel)]="newClient.username" placeholder="Nombre de usuario" type="search" maxlength="20" autocomplete="off" (keyup.enter)="closeDialog()">
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                 <mat-hint *ngIf="newClient.username !== ''">Contraseña autogenerada para cliente: {{newClient.username+passwordComp}}</mat-hint>
             </mat-form-field>
@@ -69,3 +69,8 @@
         </div>
     </ng-template>
 </div>
+<ng-template #loading>
+    <div class="container spinner-container">
+        <mat-spinner class="centered-spinner" mode="indeterminate"></mat-spinner>
+    </div>
+</ng-template>

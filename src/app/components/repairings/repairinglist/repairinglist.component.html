@@ -1,4 +1,4 @@
-<div class="container py-5 px-2">
+<div class="container back-page py-5 px-2" *ngIf="repairings && repairings.length > 0; else loading">
     <h1 class="text-center font-weight-bold">LISTA DE REPARACIONES A TELÉFONOS REGISTRADOS</h1>
     <mat-card class="d-flex justify-content-around">
         <div class="p-0">
@@ -52,3 +52,8 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
+<ng-template #loading>
+    <div class="container spinner-container">
+        <mat-spinner class="centered-spinner" mode="indeterminate"></mat-spinner>
+    </div>
+</ng-template>

@@ -40,7 +40,8 @@ export class RegisterComponent implements OnInit {
       this.utilService.openSnackBar(`${res.message}`, 'OK');
       window.location.href = '/login';
     }, (error: any) => {
-      return this.utilService.openSnackBar(`${error.error.status}`, 'OK');
+      console.log(error)
+      return this.utilService.openSnackBar(`${error.error}`, 'OK');
     })
   }
 

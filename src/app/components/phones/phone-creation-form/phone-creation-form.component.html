@@ -4,17 +4,17 @@
     <mat-divider></mat-divider>
     <mat-form-field appearance="outline" class="form-input mt-4">
         <mat-label>Marca</mat-label>
-        <input matInput [(ngModel)]="newPhone.brand" placeholder="Marca" type="search" autocomplete="off">
+        <input matInput [(ngModel)]="newPhone.brand" placeholder="Marca" type="search" autocomplete="off" (keyup.enter)="closeDialog(true)">
         <mat-icon matSuffix>camera_front</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline" class="form-input mt-4">
         <mat-label>Referencia</mat-label>
-        <input matInput [(ngModel)]="newPhone.reference" placeholder="Referencia" type="search" autocomplete="off">
+        <input matInput [(ngModel)]="newPhone.reference" placeholder="Referencia" type="search" autocomplete="off" (keyup.enter)="closeDialog(true)">
         <mat-icon matSuffix>perm_device_information</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline" class="form-input mt-4">
         <mat-label>Año de compra</mat-label>
-        <input matInput [(ngModel)]="newPhone.purchase_year" placeholder="Año de compra" type="number" min="2000" max="maxYear" autocomplete="off">
+        <input matInput [(ngModel)]="newPhone.purchase_year" placeholder="Año de compra" type="number" min="2000" max="maxYear" autocomplete="off" (keyup.enter)="closeDialog(true)">
         <mat-icon matSuffix>event</mat-icon>
     </mat-form-field>
 </div>

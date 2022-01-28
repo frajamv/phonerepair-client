@@ -4,18 +4,18 @@
         <mat-divider></mat-divider>
         <mat-form-field appearance="outline" class="form-input mt-4">
             <mat-label>Nombre completo</mat-label>
-            <input matInput [(ngModel)]="full_name" placeholder="Nombre completo" type="search" autocomplete="off">
+            <input matInput [(ngModel)]="full_name" placeholder="Nombre completo" type="search" autocomplete="off" (keyup.enter)="register()">
             <mat-icon matSuffix>badge</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline" class="form-input">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput [(ngModel)]="username" placeholder="Nombre de usuario" type="search" autocomplete="off">
+            <input matInput [(ngModel)]="username" placeholder="Nombre de usuario" type="search" autocomplete="off" (keyup.enter)="register()">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="form-input">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput [(ngModel)]="password" placeholder="Contraseña" autocomplete="off">
+            <input type="password" matInput [(ngModel)]="password" placeholder="Contraseña" autocomplete="off" (keyup.enter)="register()">
             <mat-icon matSuffix>lock</mat-icon>
         </mat-form-field>
         <br>

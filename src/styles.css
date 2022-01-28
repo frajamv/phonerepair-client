@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.back-page {
+    background-color: rgb(235, 235, 235);
+}
+
 .main-container {
     height: 100vh;
     display: flex;
@@ -42,4 +46,15 @@
 
 .example-headers-align .mat-form-field+.mat-form-field {
     margin-left: 8px;
+}
+
+.centered-spinner {
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.spinner-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }

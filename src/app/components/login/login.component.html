@@ -4,13 +4,13 @@
         <mat-divider></mat-divider>
         <mat-form-field appearance="outline" class="form-input mt-4">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput [(ngModel)]="username" placeholder="Placeholder">
+            <input matInput [(ngModel)]="username" placeholder="Placeholder" (keyup.enter)="login()">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="form-input">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput [(ngModel)]="password" placeholder="Placeholder">
+            <input type="password" matInput [(ngModel)]="password" placeholder="Placeholder" (keyup.enter)="login()">
             <mat-icon matSuffix>lock</mat-icon>
         </mat-form-field>
         <br>
